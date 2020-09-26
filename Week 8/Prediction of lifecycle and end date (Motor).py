@@ -47,7 +47,7 @@ a = 1
 while a < 2:
 
     # Insert data
-    df = pd.read_csv("test.csv", sep=',')
+    df = pd.read_csv("current_Motor.csv", sep=',')
     X = df.drop(['Status', 'Lifecycle', 'Predicted date'], axis='columns')
 
     # Determine whether the csv file has NaN
@@ -56,7 +56,7 @@ while a < 2:
 
     # Determine whether the csv file has been updated
     if True in NV:
-        regression = joblib.load('model.pkl')
+        regression = joblib.load('Model_Motor.pkl')
         status_value = regression.predict(X)
         print(status_value)
 
@@ -64,27 +64,27 @@ while a < 2:
             df["Status"] = 'Bad'
             df["Lifecycle"] = life15
             df["Predicted date"] = date_str_15
-            df.to_csv("test.csv", encoding='utf')
+            df.to_csv("current_Motor.csv", encoding='utf')
         elif 1 < status_value <= 2:
             df["Status"] = 'Poor'
             df["Lifecycle"] = life24
             df["Predicted date"] = date_str_24
-            df.to_csv("test.csv", encoding='utf')
+            df.to_csv("current_Motor.csv", encoding='utf')
         elif 2 < status_value <= 3:
             df["Status"] = 'Healthy'
             df["Lifecycle"] = life3
             df["Predicted date"] = date_str_3
-            df.to_csv("test.csv", encoding='utf')
+            df.to_csv("current_Motor.csv", encoding='utf')
         elif 3 < status_value <= 4:
             df["Status"] = 'Poor'
             df["Lifecycle"] = life24
             df["Predicted date"] = date_str_24
-            df.to_csv("test.csv", encoding='utf')
+            df.to_csv("current_Motor.csv", encoding='utf')
         else:
             df["Status"] = 'Bad'
             df["Lifecycle"] = life15
             df["Predicted date"] = date_str_15
-            df.to_csv("test.csv", encoding='utf')
+            df.to_csv("current_Motor.csv", encoding='utf')
 
         ###############################################
         # Upload into server and show data in web page#
